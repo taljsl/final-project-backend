@@ -46,14 +46,14 @@ def getUserProfile(request):
 
 
 
-@api_view('GET','PUT')
+@api_view(['GET','PUT'])
 @permission_classes(IsAuthenticated)
 def updateUser(request):
     user = request.user
     if request.method == 'GET':
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    elif request.methos == 'PUT':
+    elif request.method == 'PUT':
         # partial=True allows updating specific fields
         serializer = UserSerializer(user, data=request.data, partial=True)  
         if serializer.is_valid():
