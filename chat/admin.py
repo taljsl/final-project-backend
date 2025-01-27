@@ -1,3 +1,12 @@
 from django.contrib import admin
+from .models import ChatRoom, Message
 
-# Register your models here.
+@admin.register(ChatRoom)
+class ChatRoomAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('room', 'user', 'timestamp', 'content')
+    ordering = ('-timestamp',)  # Latest messages first
